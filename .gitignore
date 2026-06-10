@@ -1,0 +1,12 @@
+# VS 缓存
+.vs/
+*.suo
+*.user
+*.sln.cache
+
+# 编译产物
+Debug/
+Release/
+*.exe
+*.obj
+*.pdb
