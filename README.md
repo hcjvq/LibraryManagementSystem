@@ -35,5 +35,5 @@ cl /EHsc main.c controller\run_controller.c controller\user_controller.c \
 
 ## 使用说明
 - 启动后按提示输入编号完成注册/登录/借还书等操作。
-- 默认 `admin` 用户可以登录查看和添加书籍（先用 `register` 注册一个名为 `admin` 的账号，或直接向 `users.dat` 写入）。
+- 默认 `admin` 密码123456
 
