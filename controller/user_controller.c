@@ -17,7 +17,7 @@ int register_user_controller() {
 	printf("请输入该用户的密码:");
 	scanf("%s", password);
 
-	register_user(name, password);
+	register_user(name, password);//进行注册  ->user_service.c
 
 	return 200;
 }

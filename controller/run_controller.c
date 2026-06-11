@@ -20,7 +20,7 @@ void run() {
 		scanf("%d", &function_id);
 		switch (function_id) {
 		case 1:
-			register_user_controller();
+			register_user_controller();//注册  ->user_controller.c
 			break;
 		case 2:
 			// 登录账号 
