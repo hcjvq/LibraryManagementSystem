@@ -33,6 +33,7 @@ cl /EHsc main.c controller\run_controller.c controller\user_controller.c \
 
 运行生成的可执行文件 `LibraryManagementSystem.exe`。
 
+
 ## 使用说明
 - 启动后按提示输入编号完成注册/登录/借还书等操作。
 - 默认 `admin` 密码123456
