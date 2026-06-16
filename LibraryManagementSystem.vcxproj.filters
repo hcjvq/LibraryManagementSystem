@@ -36,6 +36,9 @@
     <ClCompile Include="service\book_service.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="common\common.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\common.h">
@@ -51,6 +54,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="service\book_service.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="controller\user_controller.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

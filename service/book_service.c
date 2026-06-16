@@ -1,14 +1,9 @@
 ﻿#include "../common/common.h"
 #include "../mapper/book_data.h"
 #include "../mapper/user_data.h"
-int add_book_service() {
-	char title[100];
-	char author[100];
-	printf("请输入书名:");
-	scanf("%s", title);
-	printf("请输入该书的作者:");
-	scanf("%s", author);
-
+#include "../mapper/init_data.h"
+int add_book_service(char title[CHAR_MAX_LENGTH], char author[CHAR_MAX_LENGTH]) {
+	 
 	if (title == NULL || author == NULL || strlen(title) == 0 || strlen(author) == 0) {
 		printf(" 用户名或密码不能为空！\n");
 		return Fail;
@@ -19,11 +14,9 @@ int add_book_service() {
 	strcpy(book_temp.title, title);
 	book_temp.book_id = get_book_last_id() + 1;
 	book_temp.status = 0;
-	 
-
+	
 	printf("书名:%s作者:%s状态:%d id:%d \n", title, author, book_temp.status, book_temp.book_id);
-
-
+	 
 	if (add_book(&book_temp)) {
 		return Success;
 	}
@@ -44,18 +37,15 @@ int check_all_users_service() {
 }
 
 
-int borrow_book_service( char user_name[100]) {
-	int book_id = NULL;
-	printf("请输入书籍ID:");
-	scanf("%d", &book_id);
-
+int borrow_book_service( char user_name[CHAR_MAX_LENGTH],int book_id) {
+	  
 	printf("借书信息日志: 用户名:%s 书籍ID：%d \n", user_name, book_id);
 
-	if (book_id == NULL || user_name == NULL || strlen(user_name) == 0 ) {
+	if ( user_name == NULL || strlen(user_name) == 0 ) {
 		printf(" 书籍ID 用户名 不能为空！\n");
 		return Fail;
 	}
-
+	
 	if (get_user(user_name) != Success) {
 		printf("出错了 请你稍后重试!\n");
 		return Fail;
@@ -82,21 +72,17 @@ int borrow_book_service( char user_name[100]) {
 	return Fail; 
 }
 
-int self_borrow_book_all_service(char user_name[100]) { 
+int self_borrow_book_all_service(char user_name[CHAR_MAX_LENGTH]) { 
 	printf("个人借书情况:\n");
 	self_borrow_book_all(get_user_id(user_name));
 	return Success;
 }
  
-int return_book_service(char user_name[100]) {
-
-	int book_id = NULL;
-	printf("请输入书籍ID:");
-	scanf("%d", &book_id);
-
+int return_book_service(char user_name[CHAR_MAX_LENGTH],int book_id) {
+ 
 	printf("还书信息日志: 用户名:%s 书籍ID：%d \n", user_name, book_id);
 
-	if (book_id == NULL || user_name == NULL || strlen(user_name) == 0) {
+	if (user_name == NULL || strlen(user_name) == 0) {
 		printf(" 书籍ID 用户名 不能为空！\n");
 		return Fail;
 	}
@@ -125,6 +111,24 @@ int return_book_service(char user_name[100]) {
 	} 
 	return Fail; 
 }
+
+int get_book_count_service(Book* book) {
+	return get_book_count(book);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
