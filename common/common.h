@@ -42,6 +42,14 @@ extern int g_book_count;
 int input_str(char* out_str, int max_len);
 int input_int(int* out_val);
 
+// 简单的控制台 UI 辅助函数
+void ui_clear();
+void ui_title(const char* title);
+void ui_prompt(const char* prompt);
+void ui_success(const char* msg);
+void ui_error(const char* msg);
+void ui_info(const char* label, const char* value);
+
 //typedef struct {
 //	int id;
 //	char title[50];

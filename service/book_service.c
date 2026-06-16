@@ -15,7 +15,9 @@ int add_book_service(char title[CHAR_MAX_LENGTH], char author[CHAR_MAX_LENGTH]) 
 	book_temp.book_id = get_book_last_id() + 1;
 	book_temp.status = 0;
 	
-	printf("书名:%s作者:%s状态:%d id:%d \n", title, author, book_temp.status, book_temp.book_id);
+	char info_buf[256];
+	sprintf(info_buf, "书名:%s 作者:%s id:%d", title, author, book_temp.book_id);
+	ui_info("新增图书", info_buf);
 	 
 	if (add_book(&book_temp)) {
 		return Success;
@@ -38,34 +40,31 @@ int check_all_users_service() {
 
 
 int borrow_book_service( char user_name[CHAR_MAX_LENGTH],int book_id) {
-	  
-	printf("借书信息日志: 用户名:%s 书籍ID：%d \n", user_name, book_id);
-
 	if ( user_name == NULL || strlen(user_name) == 0 ) {
-		printf(" 书籍ID 用户名 不能为空！\n");
+		ui_error("用户名不能为空");
 		return Fail;
 	}
-	
+
 	if (get_user(user_name) != Success) {
-		printf("出错了 请你稍后重试!\n");
+		ui_error("用户不存在或校验失败，请稍后重试");
 		return Fail;
 	}
 
 	if (!check_book_exist_id(book_id)) {
-		printf("不存在的书籍ID!\n");
+		ui_error("不存在的书籍 ID");
 		return Fail;
 	}
 
 	if (is_book_available(book_id) == 0) {
-		printf("该书已经被人借走啦 !\n");
+		ui_info("提示", "该书已被借出");
 		return Fail;
 	}
-	
+
 	if (borrow_book( get_user_id(user_name) , book_id)) {
-		printf("借书成功!\n");
+		ui_success("借书成功");
 		return Success;
 	} else {
-		printf("借书失败!\n");
+		ui_error("借书失败");
 		return Fail;
 	}
 
@@ -73,40 +72,36 @@ int borrow_book_service( char user_name[CHAR_MAX_LENGTH],int book_id) {
 }
 
 int self_borrow_book_all_service(char user_name[CHAR_MAX_LENGTH]) { 
-	printf("个人借书情况:\n");
 	self_borrow_book_all(get_user_id(user_name));
 	return Success;
 }
  
 int return_book_service(char user_name[CHAR_MAX_LENGTH],int book_id) {
- 
-	printf("还书信息日志: 用户名:%s 书籍ID：%d \n", user_name, book_id);
-
 	if (user_name == NULL || strlen(user_name) == 0) {
-		printf(" 书籍ID 用户名 不能为空！\n");
+		ui_error("用户名不能为空");
 		return Fail;
 	}
 	if (get_user(user_name) != Success) {
-		printf("出错了 请你稍后重试!\n");
+		ui_error("用户不存在或校验失败，请稍后重试");
 		return Fail;
 	}
 
 	if (!check_book_exist_id(book_id)) {
-		printf("不存在的书籍ID!\n");
+		ui_error("不存在的书籍 ID");
 		return Fail;
 	}
 
 	if (self_borrow_exist_by_id( get_user_id(user_name) ) == 0) {
-		printf("你没有借过这本书 !\n");
+		ui_info("提示", "您当前没有借阅记录");
 		return Fail;
 	}
 
 	if (return_book(get_user_id(user_name), book_id)) {
-		printf("还书成功!\n");
+		ui_success("还书成功");
 		return Success;
 	}
 	else {
-		printf("还书失败!\n");
+		ui_error("还书失败");
 		return Fail;
 	} 
 	return Fail; 

@@ -14,36 +14,32 @@ void run() {
 
 	 
 	while (1) {
-		
-		printf("功能:\n");
-		printf("1.注册用户\t2.登录账号\n");
-		printf("0.退出\n");
-		printf("\n\n\n\n");
-		printf("请输入功能编号:\n");
+		//ui_clear();
+		ui_title("图书管理系统 - 主菜单");
+		printf("1. 注册用户    2. 登录账号\n");
+		printf("0. 退出\n\n");
+		ui_prompt("请输入功能编号: ");
 		int function_id; 
 		if (!input_int(&function_id)) {
-			printf(INPUT_ERR_STR);
+			ui_error(INPUT_ERR_STR);
 			continue;
 		} 
 		switch (function_id) {
 		case 1: { 
 			int res = register_user_controller();
 			if (res == Success) {
-				printf("注册成功\n");
+				ui_success("注册成功");
 			}
 			else {
-				printf("注册失败\n");
+				ui_error("注册失败");
 			}
 			break;
 		}
 		case 2: {
 			// 登录账号 
 			int res = login_user_controller();
-			if (res == Success) {
-				printf("登录成功\n");
-			}
-			else {
-				printf("登录失败\n");
+			if (res == Fail) {
+				ui_error("登录失败");
 			}
 			break;
 		}

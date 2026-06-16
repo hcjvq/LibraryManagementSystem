@@ -16,11 +16,19 @@ int add_user( User * add_user ) {
 
 int user_info_all() { 
 	int cnt = 0;
+	int shown = 0;
+	ui_title("用户列表");
+	printf("%-6s | %-30s\n", "ID", "用户名");
+	printf("%s\n", "-------------------------------------------");
 	while (cnt < MAX_NUM && g_users[cnt].id != 0)
 	{
-		printf("用户名:%s\t 用户id：%d\n", g_users[cnt].name, g_users[cnt].id);
+		printf("%-6d | %-30.30s\n", g_users[cnt].id, g_users[cnt].name);
 		cnt++;
+		shown++;
 	} 
+	if (shown == 0) {
+		ui_info("提示", "当前无用户数据");
+	}
 	return Success; 
 }
 
